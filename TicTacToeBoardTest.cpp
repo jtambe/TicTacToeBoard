@@ -49,7 +49,7 @@ TEST(TicTacToeBoardTest, getWinner)
 }
 
 
-TEST(TicTacToeBoardTest, placePiece)
+TEST(TicTacToeBoardTest, placePieceatInvalidPlace)
 {
 	TicTacToeBoard b;	
 	//b.placePiece(4,5);
@@ -57,4 +57,21 @@ TEST(TicTacToeBoardTest, placePiece)
 
 }
 
+TEST(TicTacToeBoardTest, placePieceAtZeroZero)
+{
+	TicTacToeBoard b;	
+	//b.placePiece(4,5);
+	ASSERT_TRUE(b.placePiece(0,0) == X);
+	
 
+}
+
+
+TEST(TicTacToeBoardTest, placeSecondPieceAtZeroZero)
+{
+	TicTacToeBoard b;	
+	b.placePiece(0,0);
+	ASSERT_TRUE(b.placePiece(0,0) == X);
+
+
+}
