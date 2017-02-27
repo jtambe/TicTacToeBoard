@@ -75,3 +75,12 @@ TEST(TicTacToeBoardTest, placeSecondPieceAtZeroZero)
 
 
 }
+
+
+TEST(TicTacToeBoardTest, getPiece)
+{
+	TicTacToeBoard b;	
+	b.clearBoard();
+	ASSERT_TRUE(b.getPiece(4,4) == Invalid);
+
+}
