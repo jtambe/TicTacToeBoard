@@ -36,3 +36,25 @@ TEST(TicTacToeBoardTest, blankBoard)
 	}
 	ASSERT_TRUE(checker);
 }
+
+
+TEST(TicTacToeBoardTest, getWinner)
+{
+	bool checker = true;
+	TicTacToeBoard b;
+	b.clearBoard();
+	b.getWinner();
+	ASSERT_FALSE(b.getWinner() == Invalid);
+
+}
+
+
+TEST(TicTacToeBoardTest, placePiece)
+{
+	TicTacToeBoard b;	
+	//b.placePiece(4,5);
+	ASSERT_TRUE(b.placePiece(4,5) == Invalid);
+
+}
+
+

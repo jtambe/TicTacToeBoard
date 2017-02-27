@@ -1,0 +1,116 @@
+        -:    0:Source:TicTacToeBoard.cpp
+        -:    0:Graph:TicTacToeBoard.gcno
+        -:    0:Data:TicTacToeBoard.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "TicTacToeBoard.h"
+        -:    2:/**
+        -:    3: * Class for representing a 3x3 Tic-Tac-Toe game board, using the Piece enum
+        -:    4: * to represent the spaces on the board.
+        -:    5:**/
+        -:    6:
+        -:    7://Switches turn member variable to represent whether it's X's or O's turn
+    #####:    8:void TicTacToeBoard::toggleTurn()
+        -:    9:{
+    #####:   10:	if (turn == X) {turn = O;}	
+    #####:   11:	else if (turn == O) {turn = X;}
+    #####:   12:}
+        -:   13:
+        -:   14://Constructor sets an empty board and specifies it is X's turn first
+        3:   15:TicTacToeBoard::TicTacToeBoard()
+        -:   16:{
+       12:   17:	for (int i = 0; i < 3 ; i++)
+        -:   18:	{	
+       36:   19:		for(int j =0; j < 3; j++)
+        -:   20:		{
+       27:   21:			board[i][j] = Blank;
+        -:   22:		}
+        -:   23:	}
+        3:   24:	turn = X;
+        3:   25:}
+        -:   26:
+        -:   27://Resets each board location to the Blank Piece value
+        2:   28:void TicTacToeBoard::clearBoard()
+        -:   29:{
+        8:   30:	for (int i = 0; i< 3; i++)
+        -:   31:	{
+       24:   32:		for (int j =0; j < 3; j++)
+        -:   33:		{
+       18:   34:			board[i][j] = Blank;
+        -:   35:		}
+        -:   36:	}
+        2:   37:}
+        -:   38:
+        -:   39:/**
+        -:   40: * Places the piece of the current turn on the board, returns what
+        -:   41: * piece is placed, and toggles which Piece's turn it is. placePiece does 
+        -:   42: * NOT allow to place a piece in a location where there is already a piece.
+        -:   43: * In that case, placePiece just returns what is already at that location. 
+        -:   44: * Out of bounds coordinates return the Piece Invalid value
+        -:   45:**/ 
+        1:   46:Piece TicTacToeBoard::placePiece(int row, int column)
+        -:   47:{
+        1:   48:	if(row >2 || column > 2 || row < 0 || column < 0)
+        -:   49:	{
+        1:   50:		return Invalid;
+        -:   51:	}
+        -:   52: // return Invalid;
+    #####:   53:	if(board[row][column] == X || board[row][column] == O)
+        -:   54:	{
+    #####:   55:		return board[row][column];	
+        -:   56:	}
+        -:   57:	else
+        -:   58:	{
+    #####:   59:		board[row][column] = turn;
+        -:   60:	}
+    #####:   61:	toggleTurn();
+    #####:   62:	return board[row][column];
+        -:   63:}
+        -:   64:
+        -:   65:/**
+        -:   66: * Returns what piece is at the provided coordinates, or Blank if there
+        -:   67: * are no pieces there, or Invalid if the coordinates are out of bounds
+        -:   68:**/
+        9:   69:Piece TicTacToeBoard::getPiece(int row, int column)
+        -:   70:{
+        9:   71:	if(row >2 || column > 2 || row < 0 || column < 0)
+        -:   72:	{                                                	
+    #####:   73:		return Invalid;
+        -:   74:	}
+        -:   75:	else
+        -:   76:	{
+        9:   77:		return board[row][column];
+        -:   78:	}	
+        -:   79: // return Invalid;
+        -:   80:}
+        -:   81:
+        -:   82:/**
+        -:   83: * Returns which Piece has won, if there is a winner, Invalid if the game
+        -:   84: * is not over, or Blank if the board is filled and no one has won.
+        -:   85:**/
+        2:   86:Piece TicTacToeBoard::getWinner()
+        -:   87:{
+        -:   88:
+        2:   89:	if(board[0][0] == board[1][1] && board[1][1] == board[2][2])
+        -:   90:	{
+        2:   91:		return board[0][0];
+        -:   92:	}
+    #####:   93:	else if(board[0][2] == board[1][1] && board[1][1] == board[2][0])
+        -:   94:	{
+    #####:   95:		return board[0][2];		
+        -:   96:	}
+    #####:   97:	for (int i = 0 ; i < 3; i++)
+        -:   98:	{	                                                                          	       	
+    #####:   99:		if(board[i][0] == board[i][1] && board[i][1] == board[i][2])
+        -:  100:       		{
+    #####:  101:        		return board[i][0];
+        -:  102:       		}
+    #####:  103:	       	else if(board[0][2] == board[1][1] && board[1][1] == board[2][0])
+        -:  104:		{
+    #####:  105:			return board[i][0];	
+        -:  106:		}
+        -:  107:
+        -:  108:	}
+        -:  109:	// if everything fails
+    #####:  110:	 return Invalid;
+        -:  111:}
